@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <math.h>
+void dist(double x1,double x2,double x3,double y1, double y2,double y3,double *d,double *a)
+{
+    *d=sqrt((pow(x2-x1,2)+(pow(y2-y1,2))));
+    *a=fabs(1/2.0*(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2)));
+}
+
+int areaoftri(double a[], double b[], double c[] , double p[],double area )
+{
+    
+    double pab,pac,pbc,total_area;
+    pab = fabs((p[0]*(a[1]-b[1])+a[0]*(b[1]-p[1])+b[0]*(p[1]-a[1]))/2);
+    pac = fabs((p[0]*(a[1]-c[1])+a[0]*(c[1]-p[1])+c[0]*(p[1]-a[1]))/2);
+    pbc = fabs((p[0]*(b[1]-c[1])+b[0]*(c[1]-p[1])+c[0]*(p[1]-b[1]))/2);
+    total_area = pac+pab+pbc;
+    if (total_area==area){
+        
+        printf("(x,y) lines inside the triangle\n");
+        return 1;
+        
+    }
+    else{ 
+        printf("(x,y) lines outside the triangle\n");
+        return 0;
+    }
+}
+int main()
+{
+    double x1=1,x2=4,x3=2;
+    double y1=1,y2=2,y3=7;
+    double a[] = {x1,y1};
+    double b[] = {x2,y2};
+    double c[] = {x3,y3};
+    double p[] = {2,3};
+    double d,area;
+    dist(x1,x2,x3,y1,y2,y3,&d,&area);
+    areaoftri(a,b,c,p,area);
+    printf("%.2lf\n",d);
+    printf("%.2lf\n",area);
+    return 0;
+}
